@@ -18,6 +18,7 @@ namespace TT.Infra.Data.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
@@ -30,7 +31,8 @@ namespace TT.Infra.Data.Context
             modelBuilder.Configurations.Add(new ClienteConfig());
             modelBuilder.Configurations.Add(new EnderecoConfig());
             modelBuilder.Configurations.Add(new UsuarioConfig());
-            base.OnModelCreating(modelBuilder);
+
+           
         }
     }
 }

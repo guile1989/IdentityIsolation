@@ -105,9 +105,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TT.Application\TT.Application.csproj">
+      <Project>{FE55FACD-28B5-4F76-A516-697FA56EB1EC}</Project>
+      <Name>TT.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TT.Domain\TT.Domain.csproj">
+      <Project>{5CCFF3BA-A7C3-4B91-BA79-8F6169440247}</Project>
+      <Name>TT.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TT.Infra.CrossCutting.Identity\TT.Infra.CrossCutting.Identity.csproj">
       <Project>{1581CCE8-0F93-4793-8ABC-4511292A35F6}</Project>
       <Name>TT.Infra.CrossCutting.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TT.Infra.Data\TT.Infra.Data.csproj">
+      <Project>{7831C675-A302-4639-BE64-E90D4934430C}</Project>
+      <Name>TT.Infra.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

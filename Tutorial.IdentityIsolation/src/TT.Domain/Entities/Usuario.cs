@@ -21,6 +21,6 @@ namespace TT.Domain.Entities
         public virtual bool LockoutEnabled { get; set; }
         public virtual int AccessFailedCount { get; set; }
         public virtual string UserName { get; set; }
-        public virtual Cliente Cliente { get; set; }
+        public virtual Cliente Clientes { get; set; }
     }
 }

@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TT.Infra.CrossCutting.Identity.Configuration;
 using TT.Infra.CrossCutting.Identity.Model;
+using TT.Application;
+using TT.Application.ViewModels;
 
 namespace TT.Presentation.UI.MVC.Controllers
 {
@@ -15,14 +17,16 @@ namespace TT.Presentation.UI.MVC.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly IClienteAppService _clienteAppService;
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationSignInManager signInManager, ApplicationUserManager userManager, IClienteAppService clienteAppService)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
+            _userManager = userManager;
+            _clienteAppService = clienteAppService;
         }
 
-
+        
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -123,21 +127,26 @@ namespace TT.Presentation.UI.MVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegistrarClienteViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                
+                model = _clienteAppService.Adicionar(model);
+                var user = model.ApplicationUser;
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await _signInManager.SignInAsync(user, false, false);
 
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    //await _userManager.SendEmailAsync(user.Id, "Confirme sua Conta", "Por favor confirme sua conta clicando neste link: <a href='" + callbackUrl + "'></a>");
-                    //ViewBag.Link = callbackUrl;
-                    //return View("DisplayEmail");
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new {userId = user.Id, code},
+                        Request.Url.Scheme);
+                    await
+                        _userManager.SendEmailAsync(user.Id, "Confirme sua Conta",
+                            "Por favor confirme sua conta clicando neste link: <a href='" + callbackUrl + "'></a>");
+                    ViewBag.Link = callbackUrl;
+                    return View("DisplayEmail");
                 }
                 AddErrors(result);
             }
@@ -145,7 +154,6 @@ namespace TT.Presentation.UI.MVC.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
 
         //
         // GET: /Account/ConfirmEmail

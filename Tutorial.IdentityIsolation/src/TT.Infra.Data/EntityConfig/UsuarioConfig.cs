@@ -21,6 +21,8 @@ namespace TT.Infra.Data.EntityConfig
                 .IsRequired()
                 .HasMaxLength(256);
 
+            HasRequired(u => u.Clientes);
+
             ToTable("AspNetUsers");
         }
     }

@@ -19,26 +19,6 @@ namespace TT.Infra.Data.EntityConfig
 
             Property(e => e.Numero)
                 .IsRequired();
-
-            Property(e => e.Bairro)
-                .IsRequired()
-                .HasMaxLength(50);
-
-            Property(e => e.CEP)
-                .IsRequired()
-                .HasMaxLength(8);
-
-            Property(e => e.Complemento)
-                .IsRequired()
-                .HasMaxLength(100);
-
-            Property(e => e.Estado)
-                .IsRequired()
-                .HasMaxLength(100);
-
-            Property(e => e.Cidade)
-                .IsRequired()
-                .HasMaxLength(100);
         }
     }
 }

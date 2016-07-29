@@ -13,7 +13,7 @@ namespace TT.Infra.Data.EntityConfig
             HasKey(c => c.ClienteId);
             Property(c => c.ClienteId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            Property(p => p.Email)
+            Property(p => p.Nome)
                 .IsRequired()
                 .HasMaxLength(100);
         }

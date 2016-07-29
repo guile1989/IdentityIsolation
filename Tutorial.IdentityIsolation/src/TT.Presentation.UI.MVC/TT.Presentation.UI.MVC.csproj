@@ -280,6 +280,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -293,6 +294,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TT.Application\TT.Application.csproj">
+      <Project>{FE55FACD-28B5-4F76-A516-697FA56EB1EC}</Project>
+      <Name>TT.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TT.Infra.CrossCutting.Identity\TT.Infra.CrossCutting.Identity.csproj">
       <Project>{1581CCE8-0F93-4793-8ABC-4511292A35F6}</Project>
       <Name>TT.Infra.CrossCutting.Identity</Name>

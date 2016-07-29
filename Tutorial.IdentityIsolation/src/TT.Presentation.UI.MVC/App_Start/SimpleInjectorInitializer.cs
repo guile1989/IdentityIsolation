@@ -1,5 +1,3 @@
-using TT.Infra.CrossCutting.IoC;
-using TT.Presentation.UI.MVC.App_Start;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
@@ -8,11 +6,13 @@ using SimpleInjector;
 using SimpleInjector.Advanced;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
+using TT.Infra.CrossCutting.IoC;
+using TT.Presentation.UI.MVC;
 using WebActivator;
 
 [assembly: PostApplicationStartMethod(typeof(SimpleInjectorInitializer), "Initialize")]
 
-namespace TT.Presentation.UI.MVC.App_Start
+namespace TT.Presentation.UI.MVC
 {
     public static class SimpleInjectorInitializer
     {
